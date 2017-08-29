@@ -13,7 +13,8 @@ int main()
 		myList.append(i);
 	}
 
-	//cout << "List size is: "<< myList.getSize() << endl;
-	
-//	myList.print();
+//	cout << "List size is: "<< myList.getSize() << endl;
+	myList.print();
+
+	return 0;
 }
