@@ -57,12 +57,12 @@ bool LL::removeBack()
 
 node* LL::search(int num)
 {
-	node** dblNodePtr = &(this->head);
+	node* nodePtr = this->head;
 
-	while(*dblNodePtr && (*dblNodePtr)->val != num)
-		dblNodePtr = &(*dblNodePtr)->next;
+	while(nodePtr && nodePtr->val != num)
+		nodePtr = nodePtr->next;
 
-	return *dblNodePtr;
+	return nodePtr;
 }
 
 void LL::print()
