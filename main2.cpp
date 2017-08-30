@@ -21,6 +21,8 @@ int main()
 	myList.remove(10);
 	myList.removeFront();
 	myList.removeFront();
+	myList.removeBack();
+	myList.removeBack();
 
 	myList.print();
 

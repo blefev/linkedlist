@@ -31,7 +31,7 @@ bool LL::remove(int num)
 		dblNodePtr = &(*dblNodePtr)->next;
 
 	if(*dblNodePtr){
-		node *toRemove = *dblNodePtr;
+		node* toRemove = *dblNodePtr;
 		*dblNodePtr = toRemove->next;
 		delete toRemove;
 		return true;
@@ -46,13 +46,25 @@ bool LL::removeFront()
 	node * toShift = this->head->next;
 	delete this->head;
 	this->head = toShift;
+
 	return true;
 }
 
 
 bool LL::removeBack()
 {
+	node** dblNodePtr = &(this->head);
 
+	while((*dblNodePtr)->next)
+		dblNodePtr = &(*dblNodePtr)->next;
+
+	if(!dblNodePtr)
+		return false;
+
+	node* endNode = *dblNodePtr;
+	*dblNodePtr = NULL;
+	delete endNode;
+	return true;
 }
 
 node* LL::search(int num)
