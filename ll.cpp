@@ -41,7 +41,12 @@ bool LL::remove(int num)
 
 bool LL::removeFront()
 {
+	if(!this->head) return false;
 
+	node * toShift = this->head->next;
+	delete this->head;
+	this->head = toShift;
+	return true;
 }
 
 

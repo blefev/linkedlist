@@ -19,6 +19,8 @@ int main()
 	myList.search(10);
 
 	myList.remove(10);
+	myList.removeFront();
+	myList.removeFront();
 
 	myList.print();
 
