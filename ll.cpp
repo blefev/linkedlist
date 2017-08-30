@@ -30,13 +30,13 @@ bool LL::remove(int num)
 	while(*dblNodePtr && (**dblNodePtr).val != num)
 		dblNodePtr = &(*dblNodePtr)->next;
 
-	if(*dblNodePtr){
-		node* toRemove = *dblNodePtr;
-		*dblNodePtr = toRemove->next;
-		delete toRemove;
-		return true;
-	}
-	return false;
+	if(!*dblNodePtr)
+		return false;
+
+	node* toRemove = *dblNodePtr;
+	*dblNodePtr = toRemove->next;
+	delete toRemove;
+	return true;
 }
 
 bool LL::removeFront()
