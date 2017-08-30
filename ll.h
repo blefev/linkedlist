@@ -7,6 +7,8 @@
 // include iostream so anything that includes this file can use cout
 #include <iostream>
 
+using namespace std;
+
 // Struct which will be the building block of our list
 struct node{
 	int val;
@@ -24,8 +26,10 @@ public:
 	bool removeBack();
 	node* search(int);
 	void print();
+	int getSize();
 private:
 	node* head;
+	node* makeNode(int, node*);
 };
 
 #endif

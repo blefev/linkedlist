@@ -5,7 +5,7 @@ LL::LL()
 	head = NULL;
 }
 
-bool LL::prepend(int num)
+void LL::prepend(int num)
 {
 	node * newNode = new node;
 	newNode->next = this->head;
@@ -13,18 +13,17 @@ bool LL::prepend(int num)
 	this->head = newNode;
 }
 
-bool LL::append(int num)
+void LL::append(int num)
 {
 	node * newNode = new node;
 	if(!newNode)
-		return false;
+		return;
 
 	newNode->val = num;
 	newNode->next = NULL;
 
 	if(!this->head){
 		this->head = newNode;
-		return true;
 	}
 
 	node * nodePtr = this->head;
@@ -34,8 +33,6 @@ bool LL::append(int num)
 		nodePtr = nodePtr->next;
 
 	nodePtr->next = makeNode(num, NULL);
-
-	return true;
 }
 
 bool LL::remove(int num)
