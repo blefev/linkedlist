@@ -15,36 +15,24 @@ void LL::prepend(int num)
 
 void LL::append(int num)
 {
-	node * newNode = new node;
-	if(!newNode)
-		return;
+	node** dblNodePtr = &(this->head);
 
-	newNode->val = num;
-	newNode->next = NULL;
+	while(*dblNodePtr)
+		dblNodePtr = &(*dblNodePtr)->next;
 
-	if(!this->head){
-		this->head = newNode;
-	}
-
-	node * nodePtr = this->head;
-
-
-	while(nodePtr->next)
-		nodePtr = nodePtr->next;
-
-	nodePtr->next = makeNode(num, NULL);
+	*dblNodePtr = makeNode(num, NULL);
 }
 
 bool LL::remove(int num)
 {
-	node** pp = &(this->head);
+	node** dblNodePtr = &(this->head);
 
-	while(*pp && (**pp).val != num)
-		pp = &(*pp)->next;
+	while(*dblNodePtr && (**dblNodePtr).val != num)
+		dblNodePtr = &(*dblNodePtr)->next;
 
-	if(*pp){
-		node *toRemove = *pp;
-		*pp = toRemove->next;
+	if(*dblNodePtr){
+		node *toRemove = *dblNodePtr;
+		*dblNodePtr = toRemove->next;
 		delete toRemove;
 		return true;
 	}
@@ -93,7 +81,7 @@ int LL::getSize()
 	return listSize;
 }
 
-node* LL::makeNode(int val, node* nextNode)
+node* LL::makeNode(int val, node* nextNode = NULL)
 {
 	node* madeNode = new node;
 	madeNode->val = val;
