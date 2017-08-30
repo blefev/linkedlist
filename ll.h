@@ -30,6 +30,7 @@ public:
 private:
 	node* head;
 	node* makeNode(int, node*);
+	node ** traverseTo(int);
 };
 
 #endif

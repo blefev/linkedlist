@@ -37,10 +37,18 @@ void LL::append(int num)
 
 bool LL::remove(int num)
 {
-	// List empty?
-	if(!head){
-		
+	node** pp = &(this->head);
+
+	while(*pp && (**pp).val != num)
+		pp = &(*pp)->next;
+
+	if(*pp){
+		node *toRemove = *pp;
+		*pp = toRemove->next;
+		delete toRemove;
+		return true;
 	}
+	return false;
 }
 
 bool LL::removeFront()
@@ -56,7 +64,12 @@ bool LL::removeBack()
 
 node* LL::search(int num)
 {
+	node** dblNodePtr = &(this->head);
 
+	while(*dblNodePtr && (*dblNodePtr)->val != num)
+		dblNodePtr = &(*dblNodePtr)->next;
+
+	return *dblNodePtr;
 }
 
 void LL::print()
