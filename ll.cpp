@@ -7,10 +7,7 @@ LL::LL()
 
 void LL::prepend(int num)
 {
-	node * newNode = new node;
-	newNode->next = this->head;
-
-	this->head = newNode;
+	this->head = makeNode(num, this->head);
 }
 
 void LL::append(int num)
@@ -37,7 +34,7 @@ bool LL::removeFront()
 {
 	if(!this->head) return false;
 
-	node * toShift = this->head->next;
+	node* toShift = this->head->next;
 	delete this->head;
 	this->head = toShift;
 

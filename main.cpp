@@ -6,10 +6,9 @@ using namespace std;        // Include so we don't need to put std:: infront
 int main()
 {
 	LL myList;
-	ifstream input;
+	ifstream input ("cmd.txt");
 	int cmd, argument, ret;
     node* searchResult = NULL;
-	input.open("cmd.txt", "r");
 
     // while there is something to read from the file, read
 	while (input >> cmd)
