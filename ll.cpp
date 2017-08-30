@@ -30,13 +30,7 @@ bool LL::remove(int num)
 	while(*dblNodePtr && (**dblNodePtr).val != num)
 		dblNodePtr = &(*dblNodePtr)->next;
 
-	if(!*dblNodePtr)
-		return false;
-
-	node* toRemove = *dblNodePtr;
-	*dblNodePtr = toRemove->next;
-	delete toRemove;
-	return true;
+	return deleteFromPtr(dblNodePtr);
 }
 
 bool LL::removeFront()
@@ -58,13 +52,7 @@ bool LL::removeBack()
 	while((*dblNodePtr)->next)
 		dblNodePtr = &(*dblNodePtr)->next;
 
-	if(!dblNodePtr)
-		return false;
-
-	node* endNode = *dblNodePtr;
-	*dblNodePtr = NULL;
-	delete endNode;
-	return true;
+	return deleteFromPtr(dblNodePtr);
 }
 
 node* LL::search(int num)
@@ -104,4 +92,15 @@ node* LL::makeNode(int val, node* nextNode = NULL)
 	madeNode->val = val;
 	madeNode->next = nextNode;
 	return madeNode;
+}
+
+bool LL::deleteFromPtr(node** dblNodePtr)
+{
+	if(!*dblNodePtr)
+		return false;
+
+	node* toRemove = *dblNodePtr;
+	*dblNodePtr = toRemove->next;
+	delete toRemove;
+	return true;
 }
