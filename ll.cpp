@@ -1,8 +1,24 @@
 #include "ll.h"
-
+/*
+ * Linked List Implementation
+ * @author Brendan Lefevre brendan.lefevre@mines.sdsmt.edu
+ *
+ * This linked list implementation uses double pointers to traverse
+ * the list. The advantage of this is that the double pointer can
+ * _point_ to the next pointer of a node, instead of simply
+ * pointing to the node that next points to. This eliminates edge
+ * cases and allows for ultimately more concise and functional code.
+ * Instead of keeping track of a current and previous node, the program
+ * only needs the double pointer.
+ *
+ * Deletes work by taking the dereferenced pointer (equivalent to next)
+ * and deleting it's pointed-to node. Because we still have the pointer to the
+ * node, we simply move it to the node after the one we delete (before we delete it).
+ * The function deleteFromPointer() performs this operation.
+ */
 LL::LL()
 {
-	head = NULL;
+	this->head = NULL;
 }
 
 LL::~LL()
@@ -92,12 +108,15 @@ void LL::print()
 
 int LL::getSize()
 {
-	node * nodePtr = this->head;
+	node* nodePtr = this->head;
 
 	int listSize = 0;
 
 	while(nodePtr)
+	{
 		listSize++;
+		nodePtr = nodePtr->next;
+	}
 
 	return listSize;
 }

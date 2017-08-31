@@ -1,5 +1,6 @@
 #include <fstream>          // Include to use ifstream
 #include "ll.h"             // Include so can access our class
+#include <string>
 using namespace std;        // Include so we don't need to put std:: infront
                             // of cout and endl
 
@@ -73,7 +74,13 @@ int main()
             break;
         }
 	}
+	for(int i=0; i<10; i++){
+		myList.append(i);
+	}
+	myList.print();
+	cout << "Deleting list" << endl;
 	myList.deleteList();
+	myList.print();
 
 	input.close();
 
