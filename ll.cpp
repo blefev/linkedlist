@@ -5,6 +5,21 @@ LL::LL()
 	head = NULL;
 }
 
+LL::~LL()
+{
+	this->deleteList();
+}
+
+void LL::deleteList()
+{
+	while(this->head)
+	{
+		node* toDelete = this->head;
+		this->head = this->head->next;
+		delete toDelete;
+	}
+}
+
 void LL::prepend(int num)
 {
 	this->head = makeNode(num, this->head);
@@ -44,6 +59,8 @@ bool LL::removeFront()
 
 bool LL::removeBack()
 {
+	if(!this->head) return false;
+
 	node** dblNodePtr = &(this->head);
 
 	while((*dblNodePtr)->next)
@@ -65,10 +82,12 @@ node* LL::search(int num)
 void LL::print()
 {
 	node * cur = this->head;
-	while(cur){
-		cout << cur->val << endl;
+	while(cur)
+	{
+		cout << cur->val << " -> ";
 		cur = cur->next;
 	}
+	cout << "NULL" << endl;
 }
 
 int LL::getSize()

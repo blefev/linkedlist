@@ -73,6 +73,8 @@ int main()
             break;
         }
 	}
+	myList.deleteList();
+
 	input.close();
 
 	return 0;

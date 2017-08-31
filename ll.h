@@ -19,6 +19,7 @@ struct node{
 class LL{
 public:
 	LL();
+	~LL();
 	void prepend(int);
 	void append(int);
     bool remove(int);
@@ -27,6 +28,7 @@ public:
 	node* search(int);
 	void print();
 	int getSize();
+	void deleteList();
 private:
 	node* head;
 	node* makeNode(int, node*);
