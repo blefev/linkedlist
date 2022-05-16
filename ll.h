@@ -10,29 +10,30 @@
 using namespace std;
 
 // Struct which will be the building block of our list
-struct node{
-	int val;
-	node* next;
+struct node {
+  int val;
+  node *next;
 };
 
 // Linked list class definition
-class LL{
+class LL {
 public:
-	LL();
-	~LL();
-	void prepend(int);
-	void append(int);
-    bool remove(int);
-	bool removeFront();
-	bool removeBack();
-	node* search(int);
-	void print();
-	int getSize();
-	void deleteList();
+  LL();
+  ~LL();
+  void prepend(int);
+  void append(int);
+  bool remove(int);
+  bool removeFront();
+  bool removeBack();
+  node *search(int);
+  void print();
+  int getSize();
+  void deleteList();
+
 private:
-	node* head;
-	node* makeNode(int, node*);
-	bool deleteFromPtr(node**);
+  node *head;
+  node *makeNode(int, node *);
+  bool deleteFromPtr(node **);
 };
 
 #endif

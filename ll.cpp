@@ -13,129 +13,108 @@
  *
  * Deletes work by taking the dereferenced pointer (equivalent to next)
  * and deleting it's pointed-to node. Because we still have the pointer to the
- * node, we simply move it to the node after the one we delete (before we delete it).
- * The function deleteFromPointer() performs this operation.
+ * node, we simply move it to the node after the one we delete (before we delete
+ * it). The function deleteFromPointer() performs this operation.
  */
-LL::LL()
-{
-	this->head = NULL;
+LL::LL() { this->head = NULL; }
+
+LL::~LL() { this->deleteList(); }
+
+void LL::deleteList() {
+  while (this->head) {
+    node *toDelete = this->head;
+    this->head = this->head->next;
+    delete toDelete;
+  }
 }
 
-LL::~LL()
-{
-	this->deleteList();
+void LL::prepend(int num) { this->head = makeNode(num, this->head); }
+
+void LL::append(int num) {
+  node **dblNodePtr = &(this->head);
+
+  while (*dblNodePtr)
+    dblNodePtr = &(*dblNodePtr)->next;
+
+  *dblNodePtr = makeNode(num, NULL);
 }
 
-void LL::deleteList()
-{
-	while(this->head)
-	{
-		node* toDelete = this->head;
-		this->head = this->head->next;
-		delete toDelete;
-	}
+bool LL::remove(int num) {
+  node **dblNodePtr = &(this->head);
+
+  while (*dblNodePtr && (**dblNodePtr).val != num)
+    dblNodePtr = &(*dblNodePtr)->next;
+
+  return deleteFromPtr(dblNodePtr);
 }
 
-void LL::prepend(int num)
-{
-	this->head = makeNode(num, this->head);
+bool LL::removeFront() {
+  if (!this->head)
+    return false;
+
+  node *toShift = this->head->next;
+  delete this->head;
+  this->head = toShift;
+
+  return true;
 }
 
-void LL::append(int num)
-{
-	node** dblNodePtr = &(this->head);
+bool LL::removeBack() {
+  if (!this->head)
+    return false;
 
-	while(*dblNodePtr)
-		dblNodePtr = &(*dblNodePtr)->next;
+  node **dblNodePtr = &(this->head);
 
-	*dblNodePtr = makeNode(num, NULL);
+  while ((*dblNodePtr)->next)
+    dblNodePtr = &(*dblNodePtr)->next;
+
+  return deleteFromPtr(dblNodePtr);
 }
 
-bool LL::remove(int num)
-{
-	node** dblNodePtr = &(this->head);
+node *LL::search(int num) {
+  node *nodePtr = this->head;
 
-	while(*dblNodePtr && (**dblNodePtr).val != num)
-		dblNodePtr = &(*dblNodePtr)->next;
+  while (nodePtr && nodePtr->val != num)
+    nodePtr = nodePtr->next;
 
-	return deleteFromPtr(dblNodePtr);
+  return nodePtr;
 }
 
-bool LL::removeFront()
-{
-	if(!this->head) return false;
-
-	node* toShift = this->head->next;
-	delete this->head;
-	this->head = toShift;
-
-	return true;
+void LL::print() {
+  node *cur = this->head;
+  while (cur) {
+    cout << cur->val << " -> ";
+    cur = cur->next;
+  }
+  cout << "NULL" << endl;
 }
 
+int LL::getSize() {
+  node *nodePtr = this->head;
 
-bool LL::removeBack()
-{
-	if(!this->head) return false;
+  int listSize = 0;
 
-	node** dblNodePtr = &(this->head);
+  while (nodePtr) {
+    listSize++;
+    nodePtr = nodePtr->next;
+  }
 
-	while((*dblNodePtr)->next)
-		dblNodePtr = &(*dblNodePtr)->next;
-
-	return deleteFromPtr(dblNodePtr);
+  return listSize;
 }
 
-node* LL::search(int num)
-{
-	node* nodePtr = this->head;
-
-	while(nodePtr && nodePtr->val != num)
-		nodePtr = nodePtr->next;
-
-	return nodePtr;
+node *LL::makeNode(int val, node *nextNode = NULL) {
+  node *madeNode = new node;
+  madeNode->val = val;
+  madeNode->next = nextNode;
+  return madeNode;
 }
 
-void LL::print()
-{
-	node * cur = this->head;
-	while(cur)
-	{
-		cout << cur->val << " -> ";
-		cur = cur->next;
-	}
-	cout << "NULL" << endl;
-}
+bool LL::deleteFromPtr(node **dblNodePtr) {
+  if (!*dblNodePtr)
+    return false;
 
-int LL::getSize()
-{
-	node* nodePtr = this->head;
-
-	int listSize = 0;
-
-	while(nodePtr)
-	{
-		listSize++;
-		nodePtr = nodePtr->next;
-	}
-
-	return listSize;
-}
-
-node* LL::makeNode(int val, node* nextNode = NULL)
-{
-	node* madeNode = new node;
-	madeNode->val = val;
-	madeNode->next = nextNode;
-	return madeNode;
-}
-
-bool LL::deleteFromPtr(node** dblNodePtr)
-{
-	if(!*dblNodePtr)
-		return false;
-
-	node* toRemove = *dblNodePtr;
-	*dblNodePtr = toRemove->next;
-	delete toRemove;
-	return true;
+  node *toRemove = *dblNodePtr;
+  *dblNodePtr = toRemove->next;
+  delete toRemove;
+  return true;
 }
